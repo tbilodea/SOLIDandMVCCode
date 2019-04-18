@@ -3,7 +3,7 @@ package solid.example;
 public class SolidExample {
 
 	public static void main(String[] args) {
-		Object[] shapes = new Object[] {
+		Shape[] shapes = new Shape[] {
 			new Circle(2.0),
 			new Square(5.1),
 			new Square(6)
@@ -17,26 +17,40 @@ public class SolidExample {
 	}
 }
 
-class Circle {
+interface Shape{
+	public double area();
+}
+
+class Circle implements Shape {
 	double radius;
 	
 	Circle(double radius) {
 		this.radius = radius;
 	}
+	
+	@Override
+	public double area() {
+		return  Math.pow(radius, 2) * Math.PI;
+	}
 }
 
-class Square {
+class Square implements Shape {
 	double length;
 	
 	Square(double length) {
 		this.length = length;
 	}
+
+	@Override
+	public double area() {
+		return Math.pow(length, 2);
+	}
 }
 
 class AreaCalculator {
-	protected Object[] shapes;
+	protected Shape[] shapes;
 	
-	AreaCalculator(Object[] shapes) {
+	AreaCalculator(Shape[] shapes) {
 		this.shapes = shapes;
 	}
 	
@@ -45,19 +59,8 @@ class AreaCalculator {
 		double[] sums = new double[shapes.length];
 		
 		for(int i = 0; i < shapes.length; i++) {
-			Object shape = shapes[i];
-			if(shape instanceof Square) {
-				
-				sums[i] = Math.pow(((Square) shape).length, 2);
-				
-			} else if(shape instanceof Circle) {
-				
-				sums[i] = Math.pow(((Circle) shape).radius, 2)* Math.PI;
-						
-			} else {
-				
-				sums[i] = -1;
-			}
+			Shape shape = shapes[i];
+			sums[i] = shape.area();
 		}
 		
 		return sums;
