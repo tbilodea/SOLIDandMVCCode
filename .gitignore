@@ -1,0 +1,13 @@
+bin/solid/example/testnegativezero$WrappedDouble.class
+bin/solid/example/Square.class
+bin/solid/example/SolidExample.class
+bin/solid/example/Circle.class
+bin/solid/example/AreaCalculator.class
+bin/mvc/example/MVCExampleMain.class
+bin/mvc/example/AdditionView.class
+bin/mvc/example/AdditionModel.class
+bin/mvc/example/AdditionController.class
+bin/solid/example/testnegativezero.class
+.settings/org.eclipse.jdt.core.prefs
+.project
+.classpath
