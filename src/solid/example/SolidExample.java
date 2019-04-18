@@ -10,8 +10,10 @@ public class SolidExample {
 		};
 		
 		AreaCalculator aCalc = new AreaCalculator(shapes);
+		SumCalculatorOutputter sco = new SumCalculatorOutputter(aCalc);
 		
-		System.out.println(aCalc.output());
+		System.out.println(sco.getHTML());
+		System.out.println(sco.getJSON());
 	}
 }
 
@@ -39,7 +41,7 @@ class AreaCalculator {
 	}
 	
 	//logic to sum areas
-	private double[] sum() {
+	public double[] sum() {
 		double[] sums = new double[shapes.length];
 		
 		for(int i = 0; i < shapes.length; i++) {
@@ -61,8 +63,20 @@ class AreaCalculator {
 		return sums;
 	}
 	
-	public String output() {
-		return "Sums of the areas: " + sum(); 
+}
+
+class SumCalculatorOutputter {
+	AreaCalculator areaCalculator;
+	
+	public SumCalculatorOutputter(AreaCalculator areaCalculator) {
+		this.areaCalculator = areaCalculator;
 	}
 	
+	public String getHTML() {
+		return "I'm an HTML with AREAS!\n" + areaCalculator.sum().toString();
+	}
+	
+	public String getJSON() {
+		return "I'm an JSON with AREAS!\n" + areaCalculator.sum().toString();
+	}
 }
