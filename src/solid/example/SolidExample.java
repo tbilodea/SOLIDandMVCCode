@@ -34,16 +34,48 @@ class Circle implements Shape {
 	}
 }
 
-class Square implements Shape {
+class Rectangle implements Shape {
 	double length;
+	double width;
+	
+	Rectangle(double length, double width){
+		this.length = length;
+		this.width = width;
+	}
+	
+	public void setLength(double length) {
+		this.length = length;
+	}
+	
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	
+	@Override
+	public double area() {
+		return length * width;
+	}
+}
+
+//Inheriting Rectangle has a few problems:
+//a) setWidth shouldn't exist - it's a wasteful and confusing method
+//b) Rectangle.area() needs to know information about Square to act "correctly"
+class Square extends Rectangle {
 	
 	Square(double length) {
+		super(length, length);
+	}
+	
+	@Override
+	public void setLength(double length) {
 		this.length = length;
+		this.width = length;
 	}
 
 	@Override
-	public double area() {
-		return Math.pow(length, 2);
+	public void setWidth(double width) {
+		this.length = width;
+		this.width = width;
 	}
 }
 
