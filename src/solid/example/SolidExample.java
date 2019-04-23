@@ -17,10 +17,17 @@ public class SolidExample {
 	}
 }
 
-interface Shape{
+interface Shape {
 	public double area();
+}
 
+interface SolidShape extends Shape {
+	
+	@Override
+	public double area();
+	
 	public double volume();
+
 }
 
 class Circle implements Shape {
@@ -34,14 +41,9 @@ class Circle implements Shape {
 	public double area() {
 		return  Math.pow(radius, 2) * Math.PI;
 	}
-
-	@Override
-	public double volume() {
-		return 0; //Circles don't have "volumes"
-	}
 }
 
-class Cuboid implements Shape {
+class Cuboid implements SolidShape {
 	private double length;
 	
 	Cuboid(double length) {
@@ -71,11 +73,6 @@ class Rectangle implements Shape {
 	@Override
 	public double area() {
 		return length * width;
-	}
-
-	@Override
-	public double volume() {
-		return 0; //Rectangles also don't have "volumes"
 	}
 }
 
@@ -110,7 +107,7 @@ class AreaCalculator {
 
 class VolumeCalculator extends AreaCalculator {
 	
-	VolumeCalculator(Shape[] shapes) {
+	VolumeCalculator(SolidShape[] shapes) {
 		super(shapes);
 	}
 	
@@ -119,7 +116,7 @@ class VolumeCalculator extends AreaCalculator {
 		double[] sums = new double[shapes.length];
 		
 		for(int i = 0; i < shapes.length; i++) {
-			Shape shape = shapes[i];
+			SolidShape shape = (SolidShape) shapes[i];
 			sums[i] = shape.volume();
 		}
 		
